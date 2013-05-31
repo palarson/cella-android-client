@@ -26,6 +26,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import edu.washington.cs.cellasecure.fragments.DriveUnlockFragment;
+import edu.washington.cs.cellasecure.storage.DeviceUtils;
 
 import java.io.IOException;
 
@@ -76,8 +77,11 @@ public class DriveManageActivity extends Activity implements Drive.OnConnectList
     @Override
     public void onConnect() {
         assert mDrive.isConnected();
-        mDrive.setOnLockQueryResultListener(this);
-        mDrive.queryLockStatus();
+        try {
+            DeviceUtils.addToFile(getParent(), mDrive);
+            mDrive.setOnLockQueryResultListener(this);
+            mDrive.queryLockStatus();
+        } catch (IOException e) { /* let pass */ }
     }
 
     @Override

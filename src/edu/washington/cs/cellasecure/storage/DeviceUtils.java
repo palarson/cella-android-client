@@ -37,13 +37,23 @@ public class DeviceUtils {
 
     // mapToFile
     public static void mapToFile(Context context, Map<String, String> addrNameMap) throws IOException {
-        FileOutputStream outputStream;
         if (addrNameMap != null) {
+            FileOutputStream outputStream;
             outputStream = context.openFileOutput(mFilename, Context.MODE_PRIVATE);
             for (Map.Entry<String, String> e : addrNameMap.entrySet()) {
                 String line = e.getKey() + "\t" + e.getValue() + "\n";
                 outputStream.write(line.getBytes());
             }
+            outputStream.close();
+        }
+    }
+    
+    public static void addToFile(Context context, Drive drive) throws IOException {
+        if (drive != null) {
+            FileOutputStream outputStream;
+            outputStream = context.openFileOutput(mFilename, Context.MODE_APPEND);
+            String newDevice = drive.getAddress() + "\t" + drive.getName() + "\n";
+            outputStream.write(newDevice.getBytes());
             outputStream.close();
         }
     }
