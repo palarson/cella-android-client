@@ -77,11 +77,8 @@ public class DriveManageActivity extends Activity implements Drive.OnConnectList
     @Override
     public void onConnect() {
         assert mDrive.isConnected();
-        try {
-            DeviceUtils.addToFile(getParent(), mDrive);
-            mDrive.setOnLockQueryResultListener(this);
-            mDrive.queryLockStatus();
-        } catch (IOException e) { /* let pass */ }
+        mDrive.setOnLockQueryResultListener(this);
+        mDrive.queryLockStatus();
     }
 
     @Override

@@ -49,13 +49,9 @@ public class DeviceUtils {
     }
     
     public static void addToFile(Context context, Drive drive) throws IOException {
-        if (drive != null) {
-            FileOutputStream outputStream;
-            outputStream = context.openFileOutput(mFilename, Context.MODE_APPEND);
-            String newDevice = drive.getAddress() + "\t" + drive.getName() + "\n";
-            outputStream.write(newDevice.getBytes());
-            outputStream.close();
-        }
+        Map<String, String> addrNameMap = fileToMap(context);
+        addrNameMap.put(drive.getAddress(), drive.getName());
+        mapToFile(context, addrNameMap);
     }
 
     // fileToMap
