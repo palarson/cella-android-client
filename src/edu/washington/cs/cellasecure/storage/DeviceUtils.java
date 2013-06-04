@@ -96,9 +96,10 @@ public class DeviceUtils {
         public void run() {
             Map<String, String> pairedDrives = DeviceUtils.fileToMap(mActivity);
             List<Drive> result = new ArrayList<Drive>();
-            for (Map.Entry<String, String> e : pairedDrives.entrySet())
-                result.add(new Drive(e.getValue(), e.getKey()));
-
+            if (pairedDrives != null) {
+                for (Map.Entry<String, String> e : pairedDrives.entrySet())
+                    result.add(new Drive(e.getValue(), e.getKey()));
+            }
             if (mListener != null)
                 mListener.onPairedDrivesLoad(result);
         }

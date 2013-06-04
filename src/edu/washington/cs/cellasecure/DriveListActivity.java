@@ -71,6 +71,11 @@ public class DriveListActivity extends ListActivity implements OnItemClickListen
         mBT.setOnDiscoveryListener(adapter);
         DeviceUtils.loadDrives(this, adapter);
     }
+    
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
