@@ -70,7 +70,7 @@ public class DeviceUtils {
                 addrNameMap.put(splitLine[0], splitLine[1]);
             }
         } catch (FileNotFoundException fnfe) {
-            addrNameMap = null;
+            /* pass */
         }
         return addrNameMap;
     }
@@ -96,10 +96,8 @@ public class DeviceUtils {
         public void run() {
             Map<String, String> pairedDrives = DeviceUtils.fileToMap(mActivity);
             List<Drive> result = new ArrayList<Drive>();
-            if (pairedDrives != null) {
-                for (Map.Entry<String, String> e : pairedDrives.entrySet())
-                    result.add(new Drive(e.getValue(), e.getKey()));
-            }
+            for (Map.Entry<String, String> e : pairedDrives.entrySet())
+                result.add(new Drive(e.getValue(), e.getKey()));
             if (mListener != null)
                 mListener.onPairedDrivesLoad(result);
         }

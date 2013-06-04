@@ -86,7 +86,10 @@ public class DriveConfigureFragment extends Fragment implements View.OnClickList
         Log.d(TAG, "Button clicked");
         if (v.equals(mLockDriveButton)) {
             Log.d(TAG, "Lock drive button pressed");
-            mDrive.lock();
+            if (mEncryptionLevel != 0) 
+                mDrive.lock();
+            else
+                getActivity().finish();
         } else if (v.equals(mSetConfigButton)) {
             Log.d(TAG, "Set config button pressed");
             int encryptionId = mRadioGroup.getCheckedRadioButtonId();

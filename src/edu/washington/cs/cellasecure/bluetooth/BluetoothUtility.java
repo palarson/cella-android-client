@@ -78,7 +78,7 @@ public class BluetoothUtility {
                     mActivity.unregisterReceiver(mBroadcastReceiver);
                     if (mDiscoveryFinishedListener != null)
                         mDiscoveryFinishedListener.onDiscoveryFinished();
-                }
+                }// else if (BluetoothAdapter.STATE_DISCONNECTED )
             }
         };
         Log.d(TAG, "BluetoothUtility created");
