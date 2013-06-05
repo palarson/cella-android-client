@@ -32,6 +32,9 @@ import android.content.Context;
 import edu.washington.cs.cellasecure.Drive;
 
 public class DeviceUtils {
+    public static final String DEVICE_NAME_PREFIX = "CELLA";
+    public static final String RN_MAC_PREFIX = "00:06:66";
+
     private static final String mFilename = "address_to_name_map.dat";
 
     private static final ExecutorService sPool = Executors.newSingleThreadExecutor();
@@ -51,6 +54,8 @@ public class DeviceUtils {
     
     public static void addToFile(Context context, Drive drive) throws IOException {
         Map<String, String> addrNameMap = fileToMap(context);
+        if (!drive.getName().startsWith(DEVICE_NAME_PREFIX) && drive.getAddress().startsWith(RN_MAC_PREFIX))
+            throw new IOException("Drive is not a Cella device");
         addrNameMap.put(drive.getAddress(), drive.getName());
         mapToFile(context, addrNameMap);
     }
